@@ -3,24 +3,16 @@ package lifegame.model;
 public class Cell {
     private CellStatus prevStatus = CellStatus.DEAD;
     private CellStatus curStatus = CellStatus.DEAD;
-    //    private char body;
     private int x;
     private int y;
 
-    public Cell() {
-    }
-
-    public Cell(char body, int y, int x) {
+    private Cell(char body, int y, int x) {
         if (body == 'O') {
             prevStatus = CellStatus.ALIVE;
         }
 
         this.x = x;
         this.y = y;
-    }
-
-    public static Cell of() {
-        return new Cell();
     }
 
     public static Cell of(char body, int y, int x) {

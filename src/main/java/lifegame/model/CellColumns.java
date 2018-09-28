@@ -1,14 +1,15 @@
 package lifegame.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class CellColumns {
-    private List<Cell> cells = new ArrayList<Cell>();
+    private List<Cell> cells;
 
     public CellColumns(int column) {
         for (int i = 0; i < column; i++) {
-            cells.add(Cell.of());
+            cells = new ArrayList<>(Collections.nCopies(column, Cell.of(' ', 0, 0)));
         }
     }
 

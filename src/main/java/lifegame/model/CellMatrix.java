@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CellMatrix {
-    private List<CellColumns> cellsRows = new ArrayList<CellColumns>();
+    private List<CellColumns> cellsRows = new ArrayList<>();
 
-    public CellMatrix(int row, int column) {
+    private CellMatrix(int row, int column) {
         for (int i = 0; i < row; i++) {
             cellsRows.add(CellColumns.of(column));
         }
@@ -49,16 +49,14 @@ public class CellMatrix {
         return count;
     }
 
-    // checkStatus()
+    public CellStatus checkStatus(int y, int x) {
+        return cellsRows.get(y).checkStatus(x);
+    }
 
     @Override
     public String toString() {
         return "CellMatrix{" +
                 "cellsRows=" + cellsRows +
                 '}';
-    }
-
-    public CellStatus checkStatus(int y, int x) {
-        return cellsRows.get(y).checkStatus(x);
     }
 }
