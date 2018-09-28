@@ -8,6 +8,6 @@ public class CellTest {
     @Test
     public void evolve() {
         Cell cell = new Cell();
-        assertThat(cell.evolve()).isEqualTo(CellStatus.DEAD);
+        assertThat(cell.evolve(CellMatrix.of(1, 3))).isEqualTo(CellStatus.DEAD);
     }
 }
