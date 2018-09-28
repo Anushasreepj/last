@@ -10,7 +10,7 @@ public class CellMatrix {
 
     private CellMatrix(int row, int column) {
         for (int i = 0; i < row; i++) {
-            cellsRows.add(CellColumns.of(column));
+            cellsRows.add(CellColumns.of(column, this));
         }
     }
 
@@ -50,7 +50,33 @@ public class CellMatrix {
     }
 
     public CellStatus checkStatus(int y, int x) {
+        if (checkOuter(y, x)) return CellStatus.GUTTER;
+
         return cellsRows.get(y).checkStatus(x);
+    }
+
+    private boolean checkOuter(int y, int x) {
+        return x < 0 || x >= cellsRows.get(0).size() || y < 0 || y >= cellsRows.size();
+    }
+
+    public boolean evloveProcess() {
+        for (CellColumns cellColumns : cellsRows) {
+            cellColumns.evolveProcess();
+        }
+
+        return true;
+    }
+
+    public boolean isAlive(int y, int x) {
+        if (checkOuter(y, x)) {
+            return false;
+        }
+
+        return cellsRows.get(y).isAlive(x);
+    }
+
+    public boolean isCurAlive(int y, int x) {
+        return cellsRows.get(y).isCurAlive(x);
     }
 
     @Override

@@ -1,5 +1,7 @@
 package lifegame.model;
 
+import java.util.Objects;
+
 public class Cell {
     private CellStatus prevStatus = CellStatus.DEAD;
     private CellStatus curStatus = CellStatus.DEAD;
@@ -19,11 +21,6 @@ public class Cell {
         return new Cell(body, y, x);
     }
 
-    // TODO 8dir check & change status
-    public CellStatus evolve(CellMatrix cellMatrix) {
-        return getCurStatus();
-    }
-
     public CellStatus getCurStatus() {
         return curStatus;
     }
@@ -40,6 +37,18 @@ public class Cell {
         return x;
     }
 
+    public boolean isAlive() {
+        return prevStatus.equals(CellStatus.ALIVE);
+    }
+
+    public void alive() {
+        curStatus = CellStatus.ALIVE;
+    }
+
+    public boolean isCurAlive() {
+        return curStatus.equals(CellStatus.ALIVE);
+    }
+
     @Override
     public String toString() {
         return "Cell{" +
@@ -48,5 +57,21 @@ public class Cell {
                 ", x=" + x +
                 ", y=" + y +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cell cell = (Cell) o;
+        return x == cell.x &&
+                y == cell.y &&
+                prevStatus == cell.prevStatus &&
+                curStatus == cell.curStatus;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(prevStatus, curStatus, x, y);
     }
 }

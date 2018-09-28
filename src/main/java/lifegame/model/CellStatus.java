@@ -2,5 +2,6 @@ package lifegame.model;
 
 public enum CellStatus {
     ALIVE,
-    DEAD
+    DEAD,
+    GUTTER
 }
