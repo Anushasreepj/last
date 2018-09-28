@@ -10,7 +10,7 @@ public class CellMatrixTest {
     private static final Logger log = LoggerFactory.getLogger(CellMatrixTest.class);
 
     @Test
-    public void initByFile() {
+    public void initByFile_oneLine() {
         CellMatrix cellMatrix = CellMatrix.of("success.txt");
         log.debug("cell : {}", cellMatrix);
 
@@ -21,7 +21,7 @@ public class CellMatrixTest {
     }
 
     @Test
-    public void initByFile2() {
+    public void initByFile_twoLine() {
 
         CellMatrix cellMatrix2 = CellMatrix.of("success2.txt");
         log.debug("cell2 : {}", cellMatrix2);
