@@ -8,7 +8,8 @@ import java.util.List;
 class LifeWorld {
     private final CellMatrix cellMatrix;
 
-    LifeWorld(String fileName, Generation generation) {
+    LifeWorld(String fileName, int num) {
+        Generation generation = Generation.of(num);
         cellMatrix = CellMatrix.of(fileName);
 
         for (int i = 0; i < generation.getNum(); i++) {
