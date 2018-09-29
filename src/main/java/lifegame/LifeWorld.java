@@ -14,9 +14,11 @@ class LifeWorld {
         for (int i = 0; i < generationNum; i++) {
             cellMatrix.evolveProcess();
 
-            if (i != generationNum - 1) {
-                cellMatrix.curToPrevStatus();
+            if (i == generationNum - 1) {
+                break;
             }
+
+            cellMatrix.curToPrevStatus();
         }
     }
 

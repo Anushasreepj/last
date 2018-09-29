@@ -43,7 +43,7 @@ public class CellMatrix {
     }
 
     int size() {
-        // TODO 나중에 스트림으로
+        // TODO 나중에 스트림으로?
         int count = 0;
         for (CellColumns cellsRow : cellsRows) {
             count += cellsRow.size();
