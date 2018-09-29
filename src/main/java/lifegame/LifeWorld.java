@@ -1,20 +1,20 @@
 package lifegame;
 
 import lifegame.model.CellMatrix;
+import lifegame.model.Generation;
 
 import java.util.List;
 
 class LifeWorld {
-
     private final CellMatrix cellMatrix;
 
-    LifeWorld(String fileName, int generationNum) {
+    LifeWorld(String fileName, Generation generation) {
         cellMatrix = CellMatrix.of(fileName);
 
-        for (int i = 0; i < generationNum; i++) {
+        for (int i = 0; i < generation.getNum(); i++) {
             cellMatrix.evolveProcess();
 
-            if (i == generationNum - 1) {
+            if (generation.checkLastGeneration(i)) {
                 break;
             }
 
