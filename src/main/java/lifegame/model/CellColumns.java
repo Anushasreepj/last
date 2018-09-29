@@ -20,7 +20,7 @@ public class CellColumns {
     private CellMatrix cellsRows;
     private List<Cell> cells;
 
-    public CellColumns(int column, CellMatrix cellsRows) {
+    private CellColumns(int column, CellMatrix cellsRows) {
         this.cellsRows = cellsRows;
 
         for (int i = 0; i < column; i++) {
@@ -28,7 +28,7 @@ public class CellColumns {
         }
     }
 
-    public CellColumns(String fileName, CellMatrix cellsRows) {
+    CellColumns(String fileName, CellMatrix cellsRows) {
         this.cellsRows = cellsRows;
         List<String> rows = FileRead.readInStream(fileName);
         int colSize = rows.get(FIRST_LINE).length();
@@ -39,27 +39,26 @@ public class CellColumns {
         }
     }
 
-    public static CellColumns of(int column, CellMatrix cellsRows) {
+    static CellColumns of(int column, CellMatrix cellsRows) {
         return new CellColumns(column, cellsRows);
     }
 
-    public int size() {
+    int size() {
         return cells.size();
     }
 
-    public Cell putCell(Cell cell) {
+    Cell putCell(Cell cell) {
         // TODO 데메테르 위반, 혹시 객체로 빼면 과도한 추상화가 되지 않을까?
         return cells.set(cell.getX(), cell);
     }
 
-    public CellStatus checkStatus(int x) {
+    CellStatus checkStatus(int x) {
         return cells.get(x).getPrevStatus();
     }
 
-    public boolean evolveProcess() {
+    void evolveProcess() {
         for (Cell curCell : cells) {
             if (!curCell.isAlive()) {
-                // TODO 처리안함
                 newAliveProcess(curCell);
 
                 continue;
@@ -67,8 +66,6 @@ public class CellColumns {
 
             remainProcess(curCell);
         }
-
-        return true;
     }
 
     private int checkAround(Cell curCell) {
@@ -112,15 +109,15 @@ public class CellColumns {
         return count > LOW_NUM && count < OVER_NUM;
     }
 
-    public boolean isAlive(int x) {
+    boolean isAlive(int x) {
         return cells.get(x).isAlive();
     }
 
-    public boolean isCurAlive(int i) {
+    boolean isCurAlive(int i) {
         return cells.get(i).isCurAlive();
     }
 
-    public String transToString() {
+    String transToString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (Cell cell : cells) {
             if (cell.isCurAlive()) {
@@ -134,7 +131,7 @@ public class CellColumns {
     }
 
     // TODO 메서드명 같아도 되나?
-    public void curToPrevStatus() {
+    void curToPrevStatus() {
         for (Cell cell : cells) {
             cell.curToPrevStatus();
         }

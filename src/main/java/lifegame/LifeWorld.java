@@ -4,11 +4,11 @@ import lifegame.model.CellMatrix;
 
 import java.util.List;
 
-public class LifeWorld {
+class LifeWorld {
 
     private final CellMatrix cellMatrix;
 
-    public LifeWorld(String fileName, int generationNum) {
+    LifeWorld(String fileName, int generationNum) {
         cellMatrix = CellMatrix.of(fileName);
 
         for (int i = 0; i < generationNum; i++) {
@@ -20,7 +20,7 @@ public class LifeWorld {
         }
     }
 
-    public List<String> getResult() {
+    List<String> getResult() {
         return cellMatrix.makeResult();
     }
 }

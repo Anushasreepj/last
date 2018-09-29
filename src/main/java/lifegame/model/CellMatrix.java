@@ -42,7 +42,7 @@ public class CellMatrix {
         return cellsRows.get(i);
     }
 
-    public int size() {
+    int size() {
         // TODO 나중에 스트림으로
         int count = 0;
         for (CellColumns cellsRow : cellsRows) {
@@ -52,7 +52,7 @@ public class CellMatrix {
         return count;
     }
 
-    public CellStatus checkStatus(int y, int x) {
+    CellStatus checkStatus(int y, int x) {
         if (checkOuter(y, x)) return CellStatus.GUTTER;
 
         return cellsRows.get(y).checkStatus(x);
@@ -62,17 +62,15 @@ public class CellMatrix {
         return x < 0 || x >= cellsRows.get(0).size() || y < 0 || y >= cellsRows.size();
     }
 
-    public boolean evolveProcess() {
+    public void evolveProcess() {
         for (CellColumns cellColumns : cellsRows) {
             log.debug("진화 진행");
 
             cellColumns.evolveProcess();
         }
-
-        return true;
     }
 
-    public boolean isAlive(int y, int x) {
+    boolean isAlive(int y, int x) {
         if (checkOuter(y, x)) {
             return false;
         }
@@ -80,7 +78,7 @@ public class CellMatrix {
         return cellsRows.get(y).isAlive(x);
     }
 
-    public boolean isCurAlive(int y, int x) {
+    boolean isCurAlive(int y, int x) {
         return cellsRows.get(y).isCurAlive(x);
     }
 

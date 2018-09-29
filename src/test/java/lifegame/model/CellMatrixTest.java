@@ -50,7 +50,6 @@ public class CellMatrixTest {
         log.debug("matrix : {}", cellMatrix2);
     }
 
-
     @Test
     public void evolveTest2() {
         CellMatrix cellMatrix2 = CellMatrix.of("success4.txt");

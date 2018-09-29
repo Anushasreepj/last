@@ -21,44 +21,40 @@ public class Cell {
         this.y = y;
     }
 
-    public static Cell of(char body, int y, int x) {
+    static Cell of(char body, int y, int x) {
         return new Cell(body, y, x);
     }
 
-    public CellStatus getCurStatus() {
-        return curStatus;
-    }
-
-    public CellStatus getPrevStatus() {
+    CellStatus getPrevStatus() {
         return prevStatus;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public boolean isAlive() {
+    boolean isAlive() {
         return prevStatus.equals(CellStatus.ALIVE);
     }
 
-    public void alive() {
+    void alive() {
         log.debug("curStatus를 ALIVE로 변경");
         curStatus = CellStatus.ALIVE;
     }
 
-    public boolean isCurAlive() {
+    boolean isCurAlive() {
         return curStatus.equals(CellStatus.ALIVE);
     }
 
-    public void curToPrevStatus() {
+    void curToPrevStatus() {
         prevStatus = curStatus;
     }
 
-    public void dead() {
+    void dead() {
         curStatus = CellStatus.DEAD;
         log.debug("x:{}, y:{} 가 죽음", x, y);
     }
