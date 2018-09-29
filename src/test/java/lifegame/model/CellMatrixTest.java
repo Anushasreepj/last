@@ -44,7 +44,7 @@ public class CellMatrixTest {
         assertThat(cellMatrix2.isCurAlive(0, 1)).isTrue();
         assertThat(cellMatrix2.isCurAlive(0, 2)).isFalse();
         assertThat(cellMatrix2.isCurAlive(1, 0)).isFalse();
-        assertThat(cellMatrix2.isCurAlive(1, 1)).isFalse();
+        assertThat(cellMatrix2.isCurAlive(1, 1)).isTrue();
         assertThat(cellMatrix2.isCurAlive(1, 2)).isFalse();
 
         log.debug("matrix : {}", cellMatrix2);
@@ -56,15 +56,16 @@ public class CellMatrixTest {
         CellMatrix cellMatrix2 = CellMatrix.of("success4.txt");
         cellMatrix2.evloveProcess();
 
-        assertThat(cellMatrix2.isCurAlive(0, 0)).isTrue();
-        assertThat(cellMatrix2.isCurAlive(0, 1)).isFalse();
         assertThat(cellMatrix2.isCurAlive(0, 2)).isTrue();
-        assertThat(cellMatrix2.isCurAlive(1, 0)).isTrue();
-        assertThat(cellMatrix2.isCurAlive(1, 1)).isFalse();
-        assertThat(cellMatrix2.isCurAlive(1, 2)).isTrue();
-        assertThat(cellMatrix2.isCurAlive(2, 0)).isFalse();
+        assertThat(cellMatrix2.isCurAlive(1, 1)).isTrue();
+        assertThat(cellMatrix2.isCurAlive(1, 2)).isFalse();
+        assertThat(cellMatrix2.isCurAlive(1, 3)).isTrue();
         assertThat(cellMatrix2.isCurAlive(2, 1)).isTrue();
         assertThat(cellMatrix2.isCurAlive(2, 2)).isFalse();
+        assertThat(cellMatrix2.isCurAlive(2, 3)).isTrue();
+        assertThat(cellMatrix2.isCurAlive(3, 1)).isFalse();
+        assertThat(cellMatrix2.isCurAlive(3, 2)).isTrue();
+        assertThat(cellMatrix2.isCurAlive(3, 3)).isFalse();
 
         log.debug("matrix : {}", cellMatrix2);
     }

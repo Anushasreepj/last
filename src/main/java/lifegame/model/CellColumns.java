@@ -11,6 +11,11 @@ import java.util.List;
 public class CellColumns {
     private static final Logger log = LoggerFactory.getLogger(CellColumns.class);
     private static final int DIR_SIZE = 8;
+    private static final int INITIAL_VALUE = -1;
+    private static final int FIRST_LINE = 0;
+    private static final int NEW_ALIVE_NUM = 3;
+    private static final int OVER_NUM = 4;
+    private static final int LOW_NUM = 1;
 
     private CellMatrix cellsRows;
     private List<Cell> cells;
@@ -19,18 +24,18 @@ public class CellColumns {
         this.cellsRows = cellsRows;
 
         for (int i = 0; i < column; i++) {
-            cells = new ArrayList<>(Collections.nCopies(column, Cell.of(' ', -1, -1)));
+            cells = new ArrayList<>(Collections.nCopies(column, Cell.of(' ', INITIAL_VALUE, -1)));
         }
     }
 
     public CellColumns(String fileName, CellMatrix cellsRows) {
         this.cellsRows = cellsRows;
         List<String> rows = FileRead.readInStream(fileName);
-        int colSize = rows.get(0).length();
+        int colSize = rows.get(FIRST_LINE).length();
         cells = new ArrayList<>();
 
         for (int i = 0; i < colSize; i++) {
-            cells.add(i, Cell.of(rows.get(0).charAt(i), 0, i));
+            cells.add(i, Cell.of(rows.get(FIRST_LINE).charAt(i), 0, i));
         }
     }
 
@@ -54,21 +59,19 @@ public class CellColumns {
     public boolean evolveProcess() {
         for (Cell curCell : cells) {
             if (!curCell.isAlive()) {
+                // TODO 처리안함
+                newAliveProcess(curCell);
+
                 continue;
             }
 
-            // TODO 처리안함
-            if (checkAround(curCell)) {
-                curCell.alive();
-                log.debug("ALIVE : {}", curCell);
-            }
+            remainProcess(curCell);
         }
 
         return true;
     }
 
-    // TODO 리팩토링 필요
-    private boolean checkAround(Cell curCell) {
+    private int checkAround(Cell curCell) {
         int[][] direction = {{-1, 0}, {-1, -1}, {0, -1}, {+1, -1}, {+1, 0}, {+1, +1}, {0, +1}, {-1, +1}};
         int x = curCell.getX();
         int y = curCell.getY();
@@ -80,12 +83,30 @@ public class CellColumns {
                 count++;
             }
         }
+        return count;
+    }
 
-        if (count > 1 && count < 4) {
-            return true;
+    private void newAliveProcess(Cell curCell) {
+        int count = checkAround(curCell);
+
+        if (count == NEW_ALIVE_NUM) {
+            curCell.alive();
+            log.debug("New ALIVE : {}", curCell);
         }
+    }
 
-        return false;
+    private void remainProcess(Cell curCell) {
+        if (checkAroundRemain(curCell)) {
+            curCell.alive();
+            log.debug("Still ALIVE : {}", curCell);
+        }
+    }
+
+    // TODO 리팩토링 필요
+    private boolean checkAroundRemain(Cell curCell) {
+        int count = checkAround(curCell);
+
+        return count > LOW_NUM && count < OVER_NUM;
     }
 
     public boolean isAlive(int x) {
