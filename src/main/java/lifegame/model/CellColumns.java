@@ -99,7 +99,10 @@ public class CellColumns {
         if (checkAroundRemain(curCell)) {
             curCell.alive();
             log.debug("Still ALIVE : {}", curCell);
+            return;
         }
+
+        curCell.dead();
     }
 
     // TODO 리팩토링 필요
@@ -115,6 +118,26 @@ public class CellColumns {
 
     public boolean isCurAlive(int i) {
         return cells.get(i).isCurAlive();
+    }
+
+    public String transToString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Cell cell : cells) {
+            if (cell.isCurAlive()) {
+                stringBuilder.append('O');
+                continue;
+            }
+            stringBuilder.append('.');
+        }
+
+        return stringBuilder.toString();
+    }
+
+    // TODO 메서드명 같아도 되나?
+    public void curToPrevStatus() {
+        for (Cell cell : cells) {
+            cell.curToPrevStatus();
+        }
     }
 
     @Override

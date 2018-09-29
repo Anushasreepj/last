@@ -1,11 +1,14 @@
 package lifegame.model;
 
 import lifegame.utils.FileRead;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CellMatrix {
+    private static final Logger log = LoggerFactory.getLogger(CellMatrix.class);
     private List<CellColumns> cellsRows = new ArrayList<>();
 
     private CellMatrix(int row, int column) {
@@ -59,8 +62,10 @@ public class CellMatrix {
         return x < 0 || x >= cellsRows.get(0).size() || y < 0 || y >= cellsRows.size();
     }
 
-    public boolean evloveProcess() {
+    public boolean evolveProcess() {
         for (CellColumns cellColumns : cellsRows) {
+            log.debug("진화 진행");
+
             cellColumns.evolveProcess();
         }
 
@@ -77,6 +82,22 @@ public class CellMatrix {
 
     public boolean isCurAlive(int y, int x) {
         return cellsRows.get(y).isCurAlive(x);
+    }
+
+    public List<String> makeResult() {
+        List<String> result = new ArrayList<>();
+
+        for (CellColumns cellColumns : cellsRows) {
+            result.add(cellColumns.transToString());
+        }
+
+        return result;
+    }
+
+    public void curToPrevStatus() {
+        for (CellColumns cellColumns : cellsRows) {
+            cellColumns.curToPrevStatus();
+        }
     }
 
     @Override

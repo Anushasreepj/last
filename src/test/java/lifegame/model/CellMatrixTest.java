@@ -38,7 +38,7 @@ public class CellMatrixTest {
     @Test
     public void evolveTest() {
         CellMatrix cellMatrix2 = CellMatrix.of("success2.txt");
-        cellMatrix2.evloveProcess();
+        cellMatrix2.evolveProcess();
 
         assertThat(cellMatrix2.isCurAlive(0, 0)).isFalse();
         assertThat(cellMatrix2.isCurAlive(0, 1)).isTrue();
@@ -54,7 +54,7 @@ public class CellMatrixTest {
     @Test
     public void evolveTest2() {
         CellMatrix cellMatrix2 = CellMatrix.of("success4.txt");
-        cellMatrix2.evloveProcess();
+        cellMatrix2.evolveProcess();
 
         assertThat(cellMatrix2.isCurAlive(0, 2)).isTrue();
         assertThat(cellMatrix2.isCurAlive(1, 1)).isTrue();

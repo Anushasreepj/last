@@ -1,8 +1,12 @@
 package lifegame.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.Objects;
 
 public class Cell {
+    private static final Logger log = LoggerFactory.getLogger(Cell.class);
     private CellStatus prevStatus = CellStatus.DEAD;
     private CellStatus curStatus = CellStatus.DEAD;
     private int x;
@@ -42,11 +46,21 @@ public class Cell {
     }
 
     public void alive() {
+        log.debug("curStatus를 ALIVE로 변경");
         curStatus = CellStatus.ALIVE;
     }
 
     public boolean isCurAlive() {
         return curStatus.equals(CellStatus.ALIVE);
+    }
+
+    public void curToPrevStatus() {
+        prevStatus = curStatus;
+    }
+
+    public void dead() {
+        curStatus = CellStatus.DEAD;
+        log.debug("x:{}, y:{} 가 죽음", x, y);
     }
 
     @Override
