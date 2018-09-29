@@ -41,22 +41,22 @@ public class Cell {
         return prevStatus.equals(CellStatus.ALIVE);
     }
 
+    boolean isCurAlive() {
+        return curStatus.equals(CellStatus.ALIVE);
+    }
+
     void alive() {
         log.debug("curStatus를 ALIVE로 변경");
         curStatus = CellStatus.ALIVE;
     }
 
-    boolean isCurAlive() {
-        return curStatus.equals(CellStatus.ALIVE);
+    void dead() {
+        curStatus = CellStatus.DEAD;
+        log.debug("x:{}, y:{} 가 죽음", x, y);
     }
 
     void curToPrevStatus() {
         prevStatus = curStatus;
-    }
-
-    void dead() {
-        curStatus = CellStatus.DEAD;
-        log.debug("x:{}, y:{} 가 죽음", x, y);
     }
 
     @Override

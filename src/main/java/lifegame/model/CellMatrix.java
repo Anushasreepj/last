@@ -17,10 +17,6 @@ public class CellMatrix {
         }
     }
 
-    public static CellMatrix of(int row, int column) {
-        return new CellMatrix(row, column);
-    }
-
     public static CellMatrix of(String fileName) {
         List<String> rows = FileRead.readInStream(fileName);
         int rowSize = rows.size();
