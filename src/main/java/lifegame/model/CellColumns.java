@@ -48,7 +48,6 @@ public class CellColumns {
     }
 
     Cell putCell(Cell cell) {
-        // TODO 데메테르 위반, 혹시 객체로 빼면 과도한 추상화가 되지 않을까?
         return cells.set(cell.getX(), cell);
     }
 
@@ -102,7 +101,6 @@ public class CellColumns {
         curCell.dead();
     }
 
-    // TODO 리팩토링 필요
     private boolean checkAroundRemain(Cell curCell) {
         int count = checkAround(curCell);
 

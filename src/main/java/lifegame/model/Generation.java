@@ -3,10 +3,11 @@ package lifegame.model;
 import lifegame.error.IllegalGenerationException;
 
 public class Generation {
+    private static final int ZERO = 0;
     private final int num;
 
     private Generation(int num) {
-        if (num < 0) {
+        if (num < ZERO) {
             throw new IllegalGenerationException("음수로 초기화 불가능 합니다.");
         }
 
