@@ -29,11 +29,11 @@ public class Cell {
         return prevStatus;
     }
 
-    int getY() {
+    public int getY() {
         return y;
     }
 
-    int getX() {
+    public int getX() {
         return x;
     }
 

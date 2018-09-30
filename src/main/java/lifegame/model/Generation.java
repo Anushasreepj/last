@@ -7,8 +7,8 @@ public class Generation {
     private final int num;
 
     private Generation(int num) {
-        if (num < ZERO) {
-            throw new IllegalGenerationException("음수로 초기화 불가능 합니다.");
+        if (num <= ZERO) {
+            throw new IllegalGenerationException("0 이하 초기화 불가능 합니다.");
         }
 
         this.num = num;

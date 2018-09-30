@@ -1,16 +1,17 @@
 package lifegame.model;
 
+import lifegame.Direction;
 import lifegame.utils.FileRead;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class CellColumns {
     private static final Logger log = LoggerFactory.getLogger(CellColumns.class);
-    private static final int DIR_SIZE = 8;
     private static final int INITIAL_VALUE = -1;
     private static final int FIRST_LINE = 0;
     private static final int NEW_ALIVE_NUM = 3;
@@ -68,18 +69,9 @@ public class CellColumns {
     }
 
     private int checkAround(Cell curCell) {
-        int[][] direction = {{-1, 0}, {-1, -1}, {0, -1}, {+1, -1}, {+1, 0}, {+1, +1}, {0, +1}, {-1, +1}};
-        int x = curCell.getX();
-        int y = curCell.getY();
-
-        int count = 0;
-
-        for (int i = 0; i < DIR_SIZE; i++) {
-            if (cellsRows.isAlive(y + direction[i][0], x + direction[i][1])) {
-                count++;
-            }
-        }
-        return count;
+        return Math.toIntExact(Arrays.stream(Direction.values())
+                .filter(s -> cellsRows.isAlive(s.moveY(curCell), s.moveX(curCell)))
+                .count());
     }
 
     private void newAliveProcess(Cell curCell) {

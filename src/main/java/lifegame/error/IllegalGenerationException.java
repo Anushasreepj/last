@@ -8,6 +8,5 @@ public class IllegalGenerationException extends RuntimeException {
 
     public IllegalGenerationException(String message) {
         super(message);
-        log.debug("음수 초기화 불가능");
     }
 }
